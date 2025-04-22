@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Skillista Login</title>
+</head>
+
+<body>
+    <div class="loginContainer">
+
+        <div id="loginImageContainer">
+        </div>
+
+        <div id="loginFormContainer">
+            <p style="text-align: center; font-size: large;">Skillista Login</p>
+
+            <form id="loginForm" onsubmit="submitForm(event)">
+                <div class="formGroup">
+                    <label for="FirstName">First Name</label>
+                    <input type="text" name="FirstName" id="FirstName"> <br>
+                </div>
+
+                <div class="formGroup">
+                    <label for="MiddleName">Middle Name</label>
+                    <input type="text" name="MiddleName" id="MiddleName"> <br>
+                </div>
+
+                <div class="formGroup">
+                    <label for="LastName">Last Name</label>
+                    <input type="text" name="LastName" id="LastName"> <br />
+                </div>
+
+                <div class="formGroup">
+                    <label for="Gender">Gender</label>
+                    <input type="radio" name="Gender" id="Gender" value="Male"> Male
+                    <input type="radio" name="Gender" id="Gender" value="Female"> Female <br />
+
+                </div>
+
+                <div class="formGroup">
+                    <label for="Password"> Password</label>
+                    <input type="password" name="Password" id="Password"> <br>
+                </div>
+
+                <button type="submit">Submit</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const submitForm = async (event) => {
+            event.preventDefault();
+            const form = document.getElementById('loginForm');
+            const firstName = form.querySelector('input[name="FirstName"]')?.value;
+            const middleName = form.querySelector('input[name="MiddleName"]')?.value;
+            const lastName = form.querySelector('input[name="LastName"]')?.value;
+
+            const fullName = firstName + " " + middleName + " " + lastName;
+            const password = form.querySelector('input[name="Password"]')?.value;
+            const gender = form.querySelector('input[name="Gender"]:checked')?.value;
+
+            const data = {
+                fullName, gender, password
+            }
+
+            const res = await fetch('http://localhost:3000/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await res.json();
+            alert(result.message);
+        }
+
+    </script>
+
+</body>
+
+</html>

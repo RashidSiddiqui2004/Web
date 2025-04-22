@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Preferences Questionnaire</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Travel Preferences Questionnaire</h2>
+        <form id="travel-form" onsubmit="submitForm(event)">
+
+            <div class="form-group">
+                <label for="vacation-type">What type of vacation do you prefer?</label>
+                <label><input type="radio" name="vacation-type" value="Beach"> Beach</label><br>
+                <label><input type="radio" name="vacation-type" value="Mountain"> Mountain</label><br>
+                <label><input type="radio" name="vacation-type" value="City"> City</label><br>
+                <label><input type="radio" name="vacation-type" value="Adventure"> Adventure</label><br>
+                <label><input type="radio" name="vacation-type" value="Relaxation"> Relaxation</label>
+            </div>
+
+            <div class="form-group">
+                <label for="duration">What's your ideal duration for a vacation?</label>
+                <label><input type="radio" name="duration" value="Weekend"> Weekend</label><br>
+                <label><input type="radio" name="duration" value="1 Week"> 1 Week</label><br>
+                <label><input type="radio" name="duration" value="2 Weeks"> 2 Weeks</label><br>
+                <label><input type="radio" name="duration" value="Longer"> Longer</label>
+            </div>
+
+            <div class="form-group">
+                <label for="transportation">What mode of transportation do you prefer?</label>
+                <label><input type="checkbox" name="transportation" value="Airplane"> Airplane</label><br>
+                <label><input type="checkbox" name="transportation" value="Train"> Train</label><br>
+                <label><input type="checkbox" name="transportation" value="Car"> Car</label><br>
+                <label><input type="checkbox" name="transportation" value="Boat"> Boat</label>
+            </div>
+
+            <div class="form-group">
+                <label for="accommodation">What is your preferred accommodation type?</label>
+                <label><input type="radio" name="accommodation" value="Hotel"> Hotel</label><br>
+                <label><input type="radio" name="accommodation" value="AirBnB"> AirBnB</label><br>
+                <label><input type="radio" name="accommodation" value="Resort"> Resort</label><br>
+                <label><input type="radio" name="accommodation" value="Camping"> Camping</label>
+            </div>
+
+            <div class="form-group">
+                <label for="destination">What destination would you like to visit next?</label>
+                <input type="text" name="destination" placeholder="Enter destination">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Submit Preferences</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Your Travel Preferences</h2>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        async function submitForm(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('travel-form');
+            const vacationType = form.querySelector('input[name="vacation-type"]:checked')?.value;
+            const duration = form.querySelector('input[name="duration"]:checked')?.value;
+            const transportation = Array.from(form.querySelectorAll('input[name="transportation"]:checked')).map(el => el.value);
+            const accommodation = form.querySelector('input[name="accommodation"]:checked')?.value;
+            const destination = form.querySelector('input[name="destination"]').value;
+
+            const data = {
+                vacationType,
+                duration,
+                transportation,
+                accommodation,
+                destination
+            };
+
+            try {
+                const res = await fetch('http://localhost:3000/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                }); 
+
+                const result = await res.json();
+                alert(result.message);
+
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = `
+                <div class="result"><strong>Preferred Vacation Type:</strong> ${vacationType}</div>
+                <div class="result"><strong>Ideal Vacation Duration:</strong> ${duration}</div>
+                <div class="result"><strong>Preferred Transportation:</strong> ${transportation.join(', ')}</div>
+                <div class="result"><strong>Preferred Accommodation:</strong> ${accommodation}</div>
+                <div class="result"><strong>Desired Destination:</strong> ${destination}</div>
+            `;
+            } catch (err) {
+                alert('Failed to submit preferences. Check the console for details.');
+                console.error(err);
+            }
+        }
+    </script>
+
+</body>
+
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "two-way-communication",
+  "version": "1.0.0",
+  "description": "A client-server application showing interaction using 2-way communication and handshaking.",
+  "main": "index.js",
+  "scripts": {
+    "server": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rashid Siddiqui",
+  "license": "ISC"
+}

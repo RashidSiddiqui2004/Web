@@ -1,0 +1,45 @@
+* {
+    margin: 10px;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#companyName {
+    font-weight: 500;
+}
+
+.container {
+    padding: 20px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    background-image: url('./img_code.jpg');
+    color: white;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    /*  text on bottom left */
+    text-align: start;
+    justify-content: end;
+}
+
+.pendingTasks {
+    display: flex;
+    flex-direction: column;
+    max-width: 20vw;
+    font-size: small;
+    padding: 3px;
+    text-align: start;
+    justify-content: safe;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+#openAllPendingTasks {
+    text-align-last: right;
+    text-decoration: none;
+    color: blue;
+    font-weight: 200;
+    font-weight: bold;
+}

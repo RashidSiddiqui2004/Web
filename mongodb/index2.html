@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Preferences Questionnaire</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Travel Preferences Questionnaire</h2>
+
+        <form id="travel-form" onsubmit="submit(event)">
+
+            <div class="form-group">
+                <label for="vacation-type">What type of location do you prefer?</label>
+                <label><input type="radio" name="vacation-type" value="Beach"> Beach</label><br>
+                <label><input type="radio" name="vacation-type" value="Mountain"> Mountain</label><br>
+                <label><input type="radio" name="vacation-type" value="City"> City</label><br>
+                <label><input type="radio" name="vacation-type" value="Adventure"> Adventure</label><br>
+                <label><input type="radio" name="vacation-type" value="Relaxation"> Relaxation</label>
+            </div>
+
+            <div class="form-group">
+                <label for="transportation-type">Which mode of transportation do you prefer?</label>
+                <label><input type="radio" name="transportation-type" value="Train"> Train</label> <br>
+                <label><input type="radio" name="transportation-type" value="bus"> Bus</label> <br>
+                <label><input type="radio" name="transportation-type" value="Airplane"> Airplane</label> <br>
+                <label><input type="radio" name="transportation-type" value="Waterways"> Waterways</label> <br>
+            </div>
+
+            <div class="form-group">
+                <label for="accommodation-type">What's your preferred accommodation ?</label>
+                <label><input type="radio" name="" value="Hotel">Hotel</label> <br>
+                <label><input type="radio" name="" value="AirBnB">AirBnB</label> <br>
+                <label><input type="radio" name="" value="Camping">Camping</label> <br>
+            </div>
+
+
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Submit Preferences</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Your Travel Preferences</h2>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        async function submit(event) {
+            event.preventDefault();
+            const form = document.getElementById("travel-form");
+            const vacationType = form.querySelector('input[name:"vacation - type"]:checked')?.value;
+            const transType = form.querySelector('input[name:"transportation-type"]:checked')?.value;
+
+            const data = {
+                vacationType, transType
+            };
+
+
+        }
+    </script>
+
+</body>
+
+</html>

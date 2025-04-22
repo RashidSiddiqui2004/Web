@@ -1,0 +1,56 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(25, 23, 23);
+    color: white;
+}
+
+.loginContainer {
+    display: flex;
+    min-height: 100vh;
+}
+
+#loginImageContainer {
+    width: 50vw;
+    background-image: url('./img.png');
+    background-size: cover;
+}
+
+#loginFormContainer {
+    padding: 1rem;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#loginForm { 
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    row-gap: 10px;
+    width: 100%;
+}
+
+.formGroup {
+    display: flex;
+    justify-content: space-evenly;
+    row-gap: 10px;
+}
+
+input {
+    background-color: inherit;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+}
+
+input:focus {
+    background-color: inherit;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+    outline: none;
+}

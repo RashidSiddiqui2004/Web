@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web IR Performance Metrics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h2>Web IR Performance Metrics Calculator</h2>
+
+    <form id="userForm">
+        <h3>Enter Student Details</h3>
+
+        <label for="cgpa">CGPA:</label>
+        <input type="number" id="cgpa" step="0.1" min="0" max="10" required><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" min="18" max="60" required><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br>
+
+        <label for="experience">Work Experience (Years):</label>
+        <input type="number" id="experience" min="0" max="20" required><br>
+
+        <label for="actualPlacement">Placed (1: Yes, 0: No):</label>
+        <select id="actualPlacement">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select><br>
+
+        <button type="submit" class="generateButton">Submit & Calculate</button>
+    </form>
+
+    <div class="container">
+        <h3>Confusion Matrix</h3>
+        <table>
+            <tr>
+                <th></th>
+                <th>Predicted Positive</th>
+                <th>Predicted Negative</th>
+            </tr>
+            <tr>
+                <th>Actual Positive</th>
+                <td id="tp">0</td>
+                <td id="fn">0</td>
+            </tr>
+            <tr>
+                <th>Actual Negative</th>
+                <td id="fp">0</td>
+                <td id="tn">0</td>
+            </tr>
+        </table>
+
+        <h3>Performance Metrics</h3>
+        <p>Precision: <span id="precision">0</span></p>
+        <p>Recall: <span id="recall">0</span></p>
+        <p>F1-Score: <span id="f1score">0</span></p>
+        <p>Accuracy: <span id="accuracy">0</span></p>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
