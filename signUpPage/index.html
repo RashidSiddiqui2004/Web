@@ -2,86 +2,75 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Skillista Login</title>
 </head>
 
 <body>
     <div class="loginContainer">
-
-        <div id="loginImageContainer">
-        </div>
+        <div id="loginImageContainer"></div>
 
         <div id="loginFormContainer">
-            <p style="text-align: center; font-size: large;">Skillista Login</p>
-
+            <h2>Skillista Login</h2>
             <form id="loginForm" onsubmit="submitForm(event)">
                 <div class="formGroup">
                     <label for="FirstName">First Name</label>
-                    <input type="text" name="FirstName" id="FirstName"> <br>
+                    <input type="text" name="FirstName" id="FirstName" required />
                 </div>
 
                 <div class="formGroup">
                     <label for="MiddleName">Middle Name</label>
-                    <input type="text" name="MiddleName" id="MiddleName"> <br>
+                    <input type="text" name="MiddleName" id="MiddleName" />
                 </div>
 
                 <div class="formGroup">
                     <label for="LastName">Last Name</label>
-                    <input type="text" name="LastName" id="LastName"> <br />
+                    <input type="text" name="LastName" id="LastName" required />
                 </div>
 
                 <div class="formGroup">
-                    <label for="Gender">Gender</label>
-                    <input type="radio" name="Gender" id="Gender" value="Male"> Male
-                    <input type="radio" name="Gender" id="Gender" value="Female"> Female <br />
-
+                    <label>Gender</label>
+                    <div class="radioGroup">
+                        <label><input type="radio" name="Gender" value="Male" required /> Male</label>
+                        <label><input type="radio" name="Gender" value="Female" required /> Female</label>
+                    </div>
                 </div>
 
                 <div class="formGroup">
-                    <label for="Password"> Password</label>
-                    <input type="password" name="Password" id="Password"> <br>
+                    <label for="Password">Password</label>
+                    <input type="password" name="Password" id="Password" required />
                 </div>
 
-                <button type="submit">Submit</button>
-
+                <button type="submit" class="submitBtn">Submit</button>
             </form>
-
         </div>
-
     </div>
 
     <script>
-
         const submitForm = async (event) => {
             event.preventDefault();
             const form = document.getElementById('loginForm');
-            const firstName = form.querySelector('input[name="FirstName"]')?.value;
-            const middleName = form.querySelector('input[name="MiddleName"]')?.value;
-            const lastName = form.querySelector('input[name="LastName"]')?.value;
-
-            const fullName = firstName + " " + middleName + " " + lastName;
-            const password = form.querySelector('input[name="Password"]')?.value;
+            const firstName = form.FirstName.value;
+            const middleName = form.MiddleName.value;
+            const lastName = form.LastName.value;
+            const password = form.Password.value;
             const gender = form.querySelector('input[name="Gender"]:checked')?.value;
 
-            const data = {
-                fullName, gender, password
-            }
+            const fullName = [firstName, middleName, lastName].filter(Boolean).join(" ");
+            const data = { fullName, gender, password };
 
             const res = await fetch('http://localhost:3000/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data),
             });
 
             const result = await res.json();
             alert(result.message);
-        }
-
+        };
     </script>
-
 </body>
 
 </html>
